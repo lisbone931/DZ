@@ -485,3 +485,5 @@ export function Dashboard({ language = "fr" }: DashboardProps) {
     </div>
   );
 }
+
+export default Dashboard;

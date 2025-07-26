@@ -15,7 +15,7 @@ interface PerformanceMetrics {
   ttfb: number; // Time to First Byte
   domContentLoaded: number;
   windowLoad: number;
-  memoryUsage?: MemoryInfo;
+  memoryUsage?: any; // Changé pour éviter l'erreur MemoryInfo
   connectionType?: string;
 }
 
@@ -97,8 +97,8 @@ class PerformanceMonitor {
    */
   private handleNavigationTiming(entry: PerformanceNavigationTiming): void {
     const ttfb = entry.responseStart - entry.requestStart;
-    const domContentLoaded = entry.domContentLoadedEventEnd - entry.navigationStart;
-    const windowLoad = entry.loadEventEnd - entry.navigationStart;
+    const domContentLoaded = entry.domContentLoadedEventEnd - (entry.fetchStart || 0);
+    const windowLoad = entry.loadEventEnd - (entry.fetchStart || 0);
 
     log.debug('Navigation timing', {
       ttfb,
@@ -155,8 +155,8 @@ class PerformanceMonitor {
         const metrics: Partial<PerformanceMetrics> = {
           timestamp: Date.now(),
           ttfb: navigation.responseStart - navigation.requestStart,
-          domContentLoaded: navigation.domContentLoadedEventEnd - navigation.navigationStart,
-          windowLoad: navigation.loadEventEnd - navigation.navigationStart
+          domContentLoaded: navigation.domContentLoadedEventEnd - (navigation.fetchStart || 0),
+          windowLoad: navigation.loadEventEnd - (navigation.fetchStart || 0)
         };
 
         // Memory usage si disponible

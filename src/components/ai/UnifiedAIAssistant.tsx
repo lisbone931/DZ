@@ -371,3 +371,5 @@ export function UnifiedAIAssistant() {
     </div>
   );
 }
+
+export default UnifiedAIAssistant;
