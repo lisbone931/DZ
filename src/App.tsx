@@ -15,8 +15,10 @@ import { initializeSampleData } from '@/data/sampleData';
 import { useAppStore } from '@/stores/appStore';
 
 function App() {
+  console.log('App component initializing...');
   // Initialiser les handlers universels et les données d'exemple au démarrage
   React.useEffect(() => {
+    console.log('App useEffect running...');
     initializeUniversalButtonHandlers();
     
     // Initialiser les données d'exemple seulement si le store est vide
@@ -26,8 +28,11 @@ function App() {
     }
   }, []);
 
-  return (
-    <EnhancedSecurityProvider>
+  console.log('App rendering...');
+  
+  try {
+    return (
+      <EnhancedSecurityProvider>
       <UnifiedModalProvider>
           <BrowserRouter
           future={{
@@ -50,6 +55,15 @@ function App() {
         </UnifiedModalProvider>
     </EnhancedSecurityProvider>
   );
+  } catch (error) {
+    console.error('App render error:', error);
+    return (
+      <div style={{ padding: '20px', textAlign: 'center' }}>
+        <h1>Erreur de l'application</h1>
+        <p>Une erreur s'est produite: {String(error)}</p>
+      </div>
+    );
+  }
 }
 
 export default App;

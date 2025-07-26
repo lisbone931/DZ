@@ -25,9 +25,12 @@ const VALID_SECTIONS = new Set([
 ]);
 
 const Index = () => {
+  console.log('Index component loading...');
   const { section } = useParams();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState(section || "dashboard");
+  
+  console.log('Current section:', section, 'Active section:', activeSection);
   const [language, setLanguage] = useState("fr");
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
