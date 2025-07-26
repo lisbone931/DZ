@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Building, MapPin, Phone, Mail, Globe, Users, Gavel, Scale, Plus, Upload } from 'lucide-react';
+import { Building, MapPin, Phone, Mail, Globe, Users, Gavel, Scale, Plus, Upload, Search, Filter, Download, ExternalLink } from 'lucide-react';
 
 export function DirectoriesSection() {
   const institutionsData = [
@@ -294,6 +294,49 @@ export function DirectoriesSection() {
                 </button>
               </div>
             </div>
+
+            {/* Actions directes enrichies */}
+            <div className="flex gap-2 pt-3 border-t">
+              <Button 
+                size="sm" 
+                variant="outline"
+                onClick={() => handlePhoneClick(directory.phone)}
+                className="flex-1"
+              >
+                <Phone className="w-3 h-3 mr-1" />
+                Appeler
+              </Button>
+              <Button 
+                size="sm" 
+                variant="outline"
+                onClick={() => handleEmailClick(directory.email)}
+                className="flex-1"
+              >
+                <Mail className="w-3 h-3 mr-1" />
+                Email
+              </Button>
+              <Button 
+                size="sm" 
+                variant="outline"
+                onClick={() => handleWebsiteClick(directory.website)}
+                className="flex-1"
+              >
+                <ExternalLink className="w-3 h-3 mr-1" />
+                Site
+              </Button>
+            </div>
+
+            {/* Modal détaillé */}
+            <Button 
+              size="sm" 
+              className="w-full mt-2"
+              onClick={() => {
+                // Ouvrir modal avec détails complets
+                console.log('Ouvrir modal détaillé pour:', directory.name);
+              }}
+            >
+              Voir les détails complets
+            </Button>
           </CardContent>
         </Card>
       ))}
@@ -332,6 +375,91 @@ export function DirectoriesSection() {
 
         <TabsContent value="institutions" className="mt-6">
           {renderTabButtons('institutions')}
+          
+          {/* Statistiques et recherche enrichies pour institutions */}
+          <div className="mb-6 space-y-4">
+            <Card>
+              <CardContent className="pt-6">
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-6">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-600">2,847</div>
+                    <div className="text-sm text-gray-600">Institutions publiques</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-green-600">58</div>
+                    <div className="text-sm text-gray-600">Wilayas couvertes</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-purple-600">6</div>
+                    <div className="text-sm text-gray-600">Types d'institutions</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-red-600">156</div>
+                    <div className="text-sm text-gray-600">Ministères</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-orange-600">789</div>
+                    <div className="text-sm text-gray-600">Tribunaux</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-indigo-600">1,234</div>
+                    <div className="text-sm text-gray-600">Administrations</div>
+                  </div>
+                </div>
+
+                {/* Recherche avancée */}
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <input 
+                      placeholder="Rechercher par nom..." 
+                      className="p-2 border rounded-md"
+                    />
+                    <select className="p-2 border rounded-md">
+                      <option>Toutes les wilayas</option>
+                      <option>Alger (16)</option>
+                      <option>Oran (31)</option>
+                      <option>Constantine (25)</option>
+                      <option>Annaba (23)</option>
+                      {/* Plus d'options pour les 58 wilayas */}
+                    </select>
+                    <select className="p-2 border rounded-md">
+                      <option>Tous les types</option>
+                      <option>Ministères</option>
+                      <option>Tribunaux</option>
+                      <option>Préfectures</option>
+                      <option>Mairies</option>
+                      <option>Administrations</option>
+                      <option>Organismes spécialisés</option>
+                    </select>
+                    <select className="p-2 border rounded-md">
+                      <option>Tous les services</option>
+                      <option>État civil</option>
+                      <option>Justice</option>
+                      <option>Finances</option>
+                      <option>Santé</option>
+                      <option>Éducation</option>
+                    </select>
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <Button>
+                      <Search className="w-4 h-4 mr-2" />
+                      Rechercher dans les 2,847 institutions
+                    </Button>
+                    <Button variant="outline">
+                      <Filter className="w-4 h-4 mr-2" />
+                      Filtres avancés
+                    </Button>
+                    <Button variant="outline">
+                      <Download className="w-4 h-4 mr-2" />
+                      Télécharger l'annuaire complet
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           {renderDirectoryCards(institutionsData)}
         </TabsContent>
 
