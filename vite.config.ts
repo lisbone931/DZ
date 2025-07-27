@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react({
       // Optimisations React SWC basiques
+      jsxRuntime: "automatic",
     }),
     mode === 'development' &&
     componentTagger(),

@@ -167,7 +167,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
         item.content?.toLowerCase().includes(query.toLowerCase())
       ),
       templates: state.templates.filter(template =>
-        template.title?.toLowerCase().includes(query.toLowerCase()) ||
+        template.name?.toLowerCase().includes(query.toLowerCase()) ||
         template.description?.toLowerCase().includes(query.toLowerCase())
       )
     };

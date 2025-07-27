@@ -48,8 +48,6 @@ interface ContentRendererProps {
 }
 
 export function ContentRenderer({ activeSection, language, refreshTrigger }: ContentRendererProps) {
-  console.log('ContentRenderer rendering with section:', activeSection);
-  
   switch (activeSection) {
     case "dashboard":
       return (

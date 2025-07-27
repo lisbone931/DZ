@@ -83,6 +83,8 @@ export class ComponentPreloader {
     // Précharger les composants critiques
     await Promise.allSettled([
       this.preload(() => import('@/components/Dashboard'), 'Dashboard'),
+      this.preload(() => import('@/components/legal/LegalCatalog'), 'LegalCatalog'),
+      this.preload(() => import('@/components/search/SearchInterface'), 'SearchInterface'),
     ]);
   }
 }
@@ -93,12 +95,40 @@ export const LazyDashboard = createLazyComponent(
   { preload: true }
 );
 
+export const LazyLegalCatalog = createLazyComponent(
+  () => import('@/components/legal/LegalCatalog')
+);
+
+export const LazyProceduresCatalog = createLazyComponent(
+  () => import('@/components/procedures/ProceduresCatalog')
+);
+
 export const LazyOCRProcessor = createLazyComponent(
   () => import('@/components/ocr/DZOCRIAProcessor')
 );
 
+export const LazyAnalyticsDashboard = createLazyComponent(
+  () => import('@/components/analytics/AnalyticsDashboard')
+);
+
 export const LazyAIAssistant = createLazyComponent(
   () => import('@/components/ai/UnifiedAIAssistant')
+);
+
+export const LazySearchInterface = createLazyComponent(
+  () => import('@/components/search/SearchInterface')
+);
+
+export const LazyUserManagement = createLazyComponent(
+  () => import('@/components/admin/UserManagement')
+);
+
+export const LazySecuritySettings = createLazyComponent(
+  () => import('@/components/security/SecuritySettings')
+);
+
+export const LazyCollaborativeWorkspace = createLazyComponent(
+  () => import('@/components/collaboration/CollaborativeWorkspace')
 );
 
 // Hook pour préchargement conditionnel
@@ -107,6 +137,12 @@ export function useLazyPreload() {
     return {
       onMouseEnter: () => {
         switch (componentName) {
+          case 'legal':
+            ComponentPreloader.preload(() => import('@/components/legal/LegalCatalog'), 'LegalCatalog');
+            break;
+          case 'procedures':
+            ComponentPreloader.preload(() => import('@/components/procedures/ProceduresCatalog'), 'ProceduresCatalog');
+            break;
           case 'ocr':
             ComponentPreloader.preload(() => import('@/components/ocr/DZOCRIAProcessor'), 'OCRProcessor');
             break;
@@ -138,8 +174,15 @@ if (typeof window !== 'undefined') {
 
 export default {
   LazyDashboard,
+  LazyLegalCatalog,
+  LazyProceduresCatalog,
   LazyOCRProcessor,
+  LazyAnalyticsDashboard,
   LazyAIAssistant,
+  LazySearchInterface,
+  LazyUserManagement,
+  LazySecuritySettings,
+  LazyCollaborativeWorkspace,
   ComponentPreloader,
   useLazyPreload,
   createLazyComponent

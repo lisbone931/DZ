@@ -55,7 +55,7 @@ export function AIIcon({
   // Par défaut, essayer d'utiliser l'image AI.png
   return (
     <img 
-      src="/lovable-uploads/d33ce463-04ef-4713-95d3-a999e3297a38.png" 
+      src="/lovable-uploads/AI.png" 
       alt={alt} 
       className={className}
       style={getFilterStyle()}

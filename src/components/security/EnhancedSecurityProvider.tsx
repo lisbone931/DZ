@@ -21,7 +21,6 @@ interface SecurityContextType extends SecurityState {
 const SecurityContext = createContext<SecurityContextType | undefined>(undefined);
 
 export function EnhancedSecurityProvider({ children }: { children: React.ReactNode }) {
-  console.log('EnhancedSecurityProvider initializing...');
   const [securityState, setSecurityState] = useState<SecurityState>({
     level: 'medium',
     threats: 0,

@@ -14,7 +14,6 @@ interface SecurityContextType {
 const SecurityContext = createContext<SecurityContextType | undefined>(undefined);
 
 export function SecurityProvider({ children }: { children: React.ReactNode }) {
-  console.log('SecurityProvider initializing...');
   const [securityLevel, setSecurityLevel] = useState<'low' | 'medium' | 'high'>('medium');
   const [threats, setThreats] = useState<string[]>([]);
 
